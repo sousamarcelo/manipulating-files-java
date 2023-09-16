@@ -1,6 +1,7 @@
 package application;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,16 @@ public class Program {
 		String path = "C:\\temp\\file.csv";
 		List<Product> products = new ArrayList<Product>();
 		
+		String strPath = new File(path).getParent();
+		
+		boolean newFolder = new File(strPath + "\\products").mkdir();
+		System.out.println("folder created: " + newFolder);
+		System.out.println();
+		
+		
+		
+		
+		
 		try(BufferedReader br = new BufferedReader(new FileReader(path))){
 			String line = br.readLine();
 			
@@ -25,10 +36,11 @@ public class Program {
 				line = br.readLine();
 			}
 			
-			//for each provisario, conferindo se objetos foram criados na lista, copiados do arquivo.
+			/*for each provisario, conferindo se objetos foram criados na lista, copiados do arquivo.
 			for(Product product : products){
 				System.out.println(product.getName() + "," + product.getPrice() + "," + product.getQuantity());
 			}
+			*/
 			
 			
 		} catch (IOException e) {
