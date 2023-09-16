@@ -1,8 +1,10 @@
 package application;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import mode.entitie.Product;
 
 public class Program {
 
+	
 	public static void main(String[] args) {	
 		Locale.setDefault(Locale.US);
 		String path = "C:\\temp\\file.csv";
@@ -22,6 +25,8 @@ public class Program {
 		boolean newFolder = new File(strPath + "\\products").mkdir();
 		System.out.println("folder created: " + newFolder);
 		System.out.println();
+		
+		File folderOutPutProducts = new File(strPath + "\\products\\ListProducts.csv");
 		
 		
 		
@@ -36,18 +41,28 @@ public class Program {
 				line = br.readLine();
 			}
 			
-			/*for each provisario, conferindo se objetos foram criados na lista, copiados do arquivo.
+			/*
+			//for each provisario, conferindo se objetos foram criados na lista, copiados do arquivo.
 			for(Product product : products){
 				System.out.println(product.getName() + "," + product.getPrice() + "," + product.getQuantity());
 			}
 			*/
 			
+			System.out.println();
+			
+			//copiando arquivo na pasta criada
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(folderOutPutProducts))) {
+				for(Product p : products) {
+					bw.write(p.toString());
+					bw.newLine();
+				}				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}		
 			
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
-		
-
 	}
-
 }
