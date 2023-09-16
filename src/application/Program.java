@@ -55,7 +55,9 @@ public class Program {
 				for(Product p : products) {
 					bw.write(p.toString());
 					bw.newLine();
-				}				
+				}	
+				
+				System.out.println(folderOutPutProducts + "    CREATED!");
 				
 			} catch (IOException e) {
 				e.printStackTrace();
